@@ -8,17 +8,14 @@ import com.zainco.newsapp.data.network.NewsNetworkDataSource
 import com.zainco.newsapp.data.network.NewsNetworkDataSourceImpl
 import com.zainco.newsapp.data.network.interceptor.ConnectivityInterceptor
 import com.zainco.newsapp.data.network.interceptor.ConnectivityInterceptorImpl
-import com.zainco.newsapp.data.repository.NewsListRepository
-import com.zainco.newsapp.data.repository.NewsListRepositoryImpl
+import com.zainco.newsapp.data.repository.NewsRepository
+import com.zainco.newsapp.data.repository.NewsRepositoryImpl
+import com.zainco.newsapp.ui.detail.NewsDetailViewModelFactory
 import com.zainco.newsapp.ui.list.NewsListViewModelFactory
-import okhttp3.logging.HttpLoggingInterceptor
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.androidXModule
-import org.kodein.di.generic.bind
-import org.kodein.di.generic.instance
-import org.kodein.di.generic.provider
-import org.kodein.di.generic.singleton
+import org.kodein.di.generic.*
 
 class NewsApplication() : Application(), KodeinAware {
     //all injected dependencies
@@ -29,13 +26,14 @@ class NewsApplication() : Application(), KodeinAware {
         bind<ConnectivityInterceptor>() with singleton { ConnectivityInterceptorImpl(instance()) }
         bind() from singleton { NewsApiService(instance()) }
         bind<NewsNetworkDataSource>() with singleton { NewsNetworkDataSourceImpl(instance()) }
-        bind<NewsListRepository>() with singleton {
-            NewsListRepositoryImpl(
+        bind<NewsRepository>() with singleton {
+            NewsRepositoryImpl(
                 instance(),
                 instance()
             )
         }
         bind() from provider { NewsListViewModelFactory(instance()) }
+        bind() from factory { newsId: Int -> NewsDetailViewModelFactory(newsId, instance()) }
     }
 
     override fun onCreate() {

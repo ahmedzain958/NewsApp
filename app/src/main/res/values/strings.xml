@@ -11,4 +11,9 @@
     <string name="desc">Desc</string>
     <string name="source">Source</string>
     <string name="time">Time</string>
+    <string name="news">News List</string>
+    <string name="a_time_ago">a time ago</string>
+    <string name="title_of_news">Title of News</string>
+    <string name="subtitle">Subtitle</string>
+    <string name="news_for_you">News for you</string>
 </resources>

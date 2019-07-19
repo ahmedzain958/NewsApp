@@ -35,6 +35,7 @@ class NewsListFragment : ScopedFragment(), KodeinAware {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        (activity as? AppCompatActivity)?.supportActionBar?.title = getString(R.string.news)
         return inflater.inflate(R.layout.news_list_fragment, container, false)
     }
 

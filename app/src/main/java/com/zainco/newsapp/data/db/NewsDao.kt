@@ -21,4 +21,7 @@ interface NewsDao {
 
     @Query("select count(id) from article")
     fun countNews(): Int
+
+    @Query("select * from article where id=:id")
+    fun getNewsDetail(id: Int): LiveData<Article>
 }

@@ -11,6 +11,6 @@
     </fragment>
     <fragment android:id="@+id/newsDetailFragment" android:name="com.zainco.newsapp.ui.detail.NewsDetailFragment"
               android:label="news_detail_fragment" tools:layout="@layout/news_detail_fragment">
-        <argument android:name="id" app:argType="integer"/>
+        <argument android:name="newsId" app:argType="integer"/>
     </fragment>
 </navigation>

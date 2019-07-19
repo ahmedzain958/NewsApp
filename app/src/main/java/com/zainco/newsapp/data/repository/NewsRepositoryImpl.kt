@@ -15,10 +15,10 @@ const val ZERO_NUMBER_OF_NEWS_COUNT = 0
 const val TWO_DAYS_COUNT = 2L
 const val POLITICS = "politics"
 
-class NewsListRepositoryImpl(
+class NewsRepositoryImpl(
     private val newsDao: NewsDao,
     private val newsNetworkDataSource: NewsNetworkDataSource
-) : NewsListRepository {
+) : NewsRepository {
 
     init {
         newsNetworkDataSource.apply {
@@ -40,6 +40,15 @@ class NewsListRepositoryImpl(
                 newsNetworkDataSource.fetchNews(POLITICS)
             }
             return@withContext newsDao.getNews()
+        }
+    }
+
+    override suspend fun getNewsDetail(id: Int): LiveData<Article> {
+        return withContext(Dispatchers.IO) {
+            if (!isExistNews() || isFetchNewsNeeded()) {
+                newsNetworkDataSource.fetchNews(POLITICS)
+            }
+            return@withContext newsDao.getNewsDetail(id)
         }
     }
 
