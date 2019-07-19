@@ -2,8 +2,6 @@ package com.zainco.newsapp.internal
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import java.text.ParseException
-import java.text.SimpleDateFormat
 import java.util.*
 
 object DrawableUtils {

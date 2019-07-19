@@ -1,17 +1,16 @@
 package com.zainco.newsapp.ui.detail
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebViewClient
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.appbar.AppBarLayout
-
 import com.zainco.newsapp.R
 import com.zainco.newsapp.data.network.response.Article
 import com.zainco.newsapp.internal.DateUtils.getDateFormatted
@@ -69,12 +68,12 @@ class NewsDetailFragment : ScopedFragment(), KodeinAware, AppBarLayout.OnOffsetC
 
         if (percentage == 1f && isHideToolbarView) {
             date_behavior.visibility = View.GONE
-            title_appbar.setVisibility(View.VISIBLE)
+            title_appbar.visibility = View.VISIBLE
             isHideToolbarView = !isHideToolbarView
 
         } else if (percentage < 1f && !isHideToolbarView) {
             date_behavior.visibility = View.VISIBLE
-            title_appbar.setVisibility(View.GONE)
+            title_appbar.visibility = View.GONE
             isHideToolbarView = !isHideToolbarView
         }
     }

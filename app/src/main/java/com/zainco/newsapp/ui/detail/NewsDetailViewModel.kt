@@ -1,6 +1,6 @@
 package com.zainco.newsapp.ui.detail
 
-import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModel
 import com.zainco.newsapp.data.repository.NewsRepository
 import com.zainco.newsapp.internal.lazyDeferred
 

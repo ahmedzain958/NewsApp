@@ -7,7 +7,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlin.coroutines.CoroutineContext
 
-
+/*
+to handle coroutines
+ */
 abstract class ScopedFragment : Fragment(), CoroutineScope {
     private lateinit var job: Job
 

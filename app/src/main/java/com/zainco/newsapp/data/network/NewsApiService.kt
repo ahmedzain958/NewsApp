@@ -7,7 +7,6 @@ import com.zainco.newsapp.data.network.response.NewsResponse
 import kotlinx.coroutines.Deferred
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import okhttp3.internal.Internal.instance
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

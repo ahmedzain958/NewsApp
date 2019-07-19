@@ -18,8 +18,6 @@ import com.zainco.newsapp.data.network.response.Article
 import com.zainco.newsapp.internal.DateUtils.getDateFormatted
 import com.zainco.newsapp.internal.DrawableUtils
 import kotlinx.android.synthetic.main.item.*
-import org.threeten.bp.format.DateTimeFormatter
-import org.threeten.bp.format.FormatStyle
 
 
 class NewsItem(

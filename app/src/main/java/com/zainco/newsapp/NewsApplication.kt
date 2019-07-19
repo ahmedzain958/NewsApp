@@ -17,7 +17,7 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.androidXModule
 import org.kodein.di.generic.*
 
-class NewsApplication() : Application(), KodeinAware {
+class NewsApplication : Application(), KodeinAware {
     //all injected dependencies
     override val kodein = Kodein.lazy {
         import(androidXModule(this@NewsApplication))

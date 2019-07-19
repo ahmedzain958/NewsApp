@@ -1,17 +1,16 @@
 package com.zainco.newsapp.ui.list
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder
-
 import com.zainco.newsapp.R
 import com.zainco.newsapp.data.network.response.Article
 import com.zainco.newsapp.ui.base.ScopedFragment
@@ -21,7 +20,6 @@ import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
-import java.util.Collections.addAll
 
 class NewsListFragment : ScopedFragment(), KodeinAware {
 
