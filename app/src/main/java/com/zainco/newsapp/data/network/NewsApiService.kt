@@ -1,14 +1,58 @@
 package com.zainco.newsapp.data.network
 
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import com.zainco.newsapp.BuildConfig
+import com.zainco.newsapp.data.network.interceptor.ConnectivityInterceptor
 import com.zainco.newsapp.data.network.response.NewsResponse
 import kotlinx.coroutines.Deferred
+import okhttp3.Interceptor
+import okhttp3.OkHttpClient
+import okhttp3.internal.Internal.instance
+import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface NewsApiService {
-    @GET
+    @GET("top-headlines")
     fun getNews(
-        @Query("q") query: String,
-        @Query("from") date: String = "2019-06-19"
+        @Query("q") query: String
     ): Deferred<NewsResponse>
+
+
+    companion object {
+        operator fun invoke(
+            connectivityInterceptor: ConnectivityInterceptor
+        ): NewsApiService {
+            val requestInterceptor = Interceptor { chain ->
+
+                val url = chain.request()
+                    .url()
+                    .newBuilder()
+                    .addQueryParameter("apiKey", BuildConfig.API_KEY)
+                    .build()
+                val request = chain.request()
+                    .newBuilder()
+                    .url(url)
+                    .build()
+
+                return@Interceptor chain.proceed(request)
+            }
+            val builder = OkHttpClient.Builder()
+                .addInterceptor(requestInterceptor)
+                .addInterceptor(connectivityInterceptor)
+            if (BuildConfig.DEBUG) {
+                builder.addInterceptor(HttpLoggingInterceptor())
+            }
+            val okHttpClient = builder.build()
+            return Retrofit.Builder()
+                .client(okHttpClient)
+                .baseUrl(BuildConfig.BASE_URL)
+                .addCallAdapterFactory(CoroutineCallAdapterFactory())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+                .create(NewsApiService::class.java)
+        }
+    }
 }

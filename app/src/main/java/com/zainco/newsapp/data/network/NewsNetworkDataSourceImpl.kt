@@ -12,10 +12,10 @@ class NewsNetworkDataSourceImpl(private val newsApiService: NewsApiService) : Ne
     override val downloadedNews: LiveData<NewsResponse>
         get() = _downloadedNews
 
-    override suspend fun fetchNews(query: String, date: String) {
+    override suspend fun fetchNews(query: String) {
         try {
             val fetchedNews = newsApiService
-                .getNews(query, date)
+                .getNews(query)
                 .await()
             _downloadedNews.postValue(fetchedNews)
         } catch (e: NoConnectivityException) {

@@ -1,13 +1,21 @@
 package com.zainco.newsapp.data.network.response
 
 
+import androidx.room.Embedded
+import androidx.room.Entity
+import androidx.room.Index
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
+@Entity(tableName = "article", indices = [Index(value = ["id"], unique = true)])
 data class Article(
+    @PrimaryKey(autoGenerate = true)
+    val id: Int,
     @SerializedName("source")
+    @Embedded(prefix = "source")
     val source: Source,
     @SerializedName("author")
-    val author: String,
+    val author: String?,
     @SerializedName("title")
     val title: String,
     @SerializedName("description")
@@ -15,7 +23,7 @@ data class Article(
     @SerializedName("url")
     val url: String,
     @SerializedName("urlToImage")
-    val urlToImage: String,
+    val urlToImage: String?,
     @SerializedName("publishedAt")
     val publishedAt: String,
     @SerializedName("content")

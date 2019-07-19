@@ -1,6 +1,6 @@
 ext {
     endpoints = [
-            BASE_URL = "\"https://newsapi.org/v2/everything?/\"",
+            BASE_URL = "\"https://newsapi.org/v2/\"",
     ]
 
     accessTokens = [

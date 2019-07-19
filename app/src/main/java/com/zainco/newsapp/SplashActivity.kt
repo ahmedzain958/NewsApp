@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.view.Window
 
 class SplashActivity : AppCompatActivity() {
-    val SPLASH_DURATION: Long = 1500
+    val SPLASH_DURATION: Long = 1000
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

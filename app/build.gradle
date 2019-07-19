@@ -17,6 +17,9 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField "String", "BASE_URL", BASE_URL
+        buildConfigField "String", "API_KEY", API_KEY
     }
     buildTypes {
         release {
@@ -55,7 +58,7 @@ dependencies {
 
     // Kotlin Android Coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.1.1'
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.0.0"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.1.0"
 
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
@@ -82,11 +85,20 @@ dependencies {
     implementation 'com.xwray:groupie:2.1.0'
     implementation 'com.xwray:groupie-kotlin-android-extensions:2.1.0'
 
-    // Preference
-    implementation "androidx.preference:preference:1.0.0"
+    // interceptor
+    implementation "com.squareup.okhttp3:logging-interceptor:3.11.0"
 
     // New Material Design
     implementation "com.google.android.material:material:1.0.0"
+
+    //CardView
+    implementation 'androidx.cardview:cardview:1.0.0'
+
+    //Recyclerview
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+
+    //CircleImage
+    implementation 'de.hdodenhof:circleimageview:2.2.0'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'

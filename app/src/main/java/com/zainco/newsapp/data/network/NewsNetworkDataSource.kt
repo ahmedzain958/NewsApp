@@ -5,5 +5,5 @@ import com.zainco.newsapp.data.network.response.NewsResponse
 
 interface NewsNetworkDataSource {
     val downloadedNews: LiveData<NewsResponse>
-    suspend fun fetchNews(query: String, date: String)
+    suspend fun fetchNews(query: String)
 }
