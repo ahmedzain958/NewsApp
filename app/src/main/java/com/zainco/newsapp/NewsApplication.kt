@@ -14,7 +14,7 @@ import org.kodein.di.generic.provider
 import org.kodein.di.generic.singleton
 
 class NewsApplication() : Application(), KodeinAware {
-
+    //all injected dependencies
     override val kodein = Kodein.lazy {
         import(androidXModule(this@NewsApplication))
         bind<NewsListRepository>() with singleton { NewsListRepositoryImpl() }

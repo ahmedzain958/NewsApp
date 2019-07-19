@@ -1,0 +1,12 @@
+ext {
+    endpoints = [
+            BASE_URL = "\"https://newsapi.org/v2/everything?/\"",
+    ]
+
+    accessTokens = [
+    ]
+
+    constants = [
+            API_KEY = "\"bc7240aefc224d479c7360ff9c88a680\"",
+    ]
+}
