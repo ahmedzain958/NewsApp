@@ -27,5 +27,5 @@ data class Article(
     @SerializedName("publishedAt")
     val publishedAt: String,
     @SerializedName("content")
-    val content: String
+    val content: String?
 )

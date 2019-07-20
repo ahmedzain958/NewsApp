@@ -1,6 +1,7 @@
 package com.zainco.newsapp
 
 import android.app.Application
+import com.google.gson.GsonBuilder
 import com.jakewharton.threetenabp.AndroidThreeTen
 import com.zainco.newsapp.data.db.NewsDatabase
 import com.zainco.newsapp.data.network.NewsApiService
@@ -8,8 +9,11 @@ import com.zainco.newsapp.data.network.NewsNetworkDataSource
 import com.zainco.newsapp.data.network.NewsNetworkDataSourceImpl
 import com.zainco.newsapp.data.network.interceptor.ConnectivityInterceptor
 import com.zainco.newsapp.data.network.interceptor.ConnectivityInterceptorImpl
+import com.zainco.newsapp.data.network.interceptor.ErrorMappingInterceptor
 import com.zainco.newsapp.data.repository.NewsRepository
 import com.zainco.newsapp.data.repository.NewsRepositoryImpl
+import com.zainco.newsapp.data.resources.AppResources
+import com.zainco.newsapp.data.resources.ResourcesRepository
 import com.zainco.newsapp.ui.detail.NewsDetailViewModelFactory
 import com.zainco.newsapp.ui.list.NewsListViewModelFactory
 import org.kodein.di.Kodein
@@ -23,8 +27,12 @@ class NewsApplication : Application(), KodeinAware {
         import(androidXModule(this@NewsApplication))
         bind() from singleton { instance<NewsDatabase>().newsDao() }
         bind() from singleton { NewsDatabase(instance()) }
+        bind() from singleton { AppResources(instance()) }
+        bind() from singleton { ResourcesRepository(instance()) }
+        bind() from singleton { GsonBuilder().serializeNulls().create() }
+        bind() from singleton { ErrorMappingInterceptor(instance(), instance()) }
         bind<ConnectivityInterceptor>() with singleton { ConnectivityInterceptorImpl(instance()) }
-        bind() from singleton { NewsApiService(instance()) }
+        bind() from singleton { NewsApiService(instance(), instance()) }
         bind<NewsNetworkDataSource>() with singleton { NewsNetworkDataSourceImpl(instance()) }
         bind<NewsRepository>() with singleton {
             NewsRepositoryImpl(

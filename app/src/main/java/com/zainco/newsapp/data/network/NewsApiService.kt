@@ -3,6 +3,7 @@ package com.zainco.newsapp.data.network
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.zainco.newsapp.BuildConfig
 import com.zainco.newsapp.data.network.interceptor.ConnectivityInterceptor
+import com.zainco.newsapp.data.network.interceptor.ErrorMappingInterceptor
 import com.zainco.newsapp.data.network.response.NewsResponse
 import kotlinx.coroutines.Deferred
 import okhttp3.Interceptor
@@ -14,7 +15,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface NewsApiService {
-    @GET("top-headlines")
+    @GET("everything")
     fun getNews(
         @Query("q") query: String
     ): Deferred<NewsResponse>
@@ -22,7 +23,8 @@ interface NewsApiService {
 
     companion object {
         operator fun invoke(
-            connectivityInterceptor: ConnectivityInterceptor
+            connectivityInterceptor: ConnectivityInterceptor,
+            errorMappingInterceptor: ErrorMappingInterceptor
         ): NewsApiService {
             val requestInterceptor = Interceptor { chain ->
 
@@ -41,6 +43,7 @@ interface NewsApiService {
             val builder = OkHttpClient.Builder()
                 .addInterceptor(requestInterceptor)
                 .addInterceptor(connectivityInterceptor)
+                .addInterceptor(errorMappingInterceptor)
             if (BuildConfig.DEBUG) {
                 builder.addInterceptor(HttpLoggingInterceptor())
             }

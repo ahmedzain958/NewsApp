@@ -45,12 +45,13 @@ class ErrorMappingInterceptor(
 
                 val apiException = gsonParser.fromJson(responseBody, APIException::class.java)
 
-                if (response.isSuccessful.not().or(apiException.message.isNotEmpty())) {
+                if (response.isSuccessful.not().or(apiException.status == "error")) {
                     throw apiException
                 }
 
             } catch (e: JsonSyntaxException) {
                 throw APIException(
+                    "error", "",
                     message = resourcesRepository.getGenericUnknownErrorMessage()
                 )
             }
